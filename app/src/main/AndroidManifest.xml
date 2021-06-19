@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.payoneer.payoneerchallenge">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".PayoneerApplication"
         android:allowBackup="true"
