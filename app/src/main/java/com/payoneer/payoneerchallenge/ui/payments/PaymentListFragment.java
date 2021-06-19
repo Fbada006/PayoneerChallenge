@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import com.payoneer.payoneerchallenge.R;
 import dagger.hilt.android.AndroidEntryPoint;
+import timber.log.Timber;
 
 @AndroidEntryPoint
 public class PaymentListFragment extends Fragment {
@@ -35,6 +36,27 @@ public class PaymentListFragment extends Fragment {
     }
 
     private void getData() {
-
+        paymentsViewModel.getPayments().observe(getViewLifecycleOwner(), networksResource -> {
+            switch (networksResource.status) {
+                case SUCCESS:
+                    Timber.e("We have data " + networksResource.data);
+                    break;
+                case ERROR:
+                    Timber.e("Generic error");
+                    break;
+                case LOADING:
+                    Timber.e("Loading");
+                    break;
+                case NOT_FOUND:
+                    Timber.e("Not found");
+                    break;
+                case SERVER_ERROR:
+                    Timber.e("Server error");
+                    break;
+                case UNKNOWN_CODE:
+                    Timber.e("Unknown code ");
+                    break;
+            }
+        });
     }
 }
