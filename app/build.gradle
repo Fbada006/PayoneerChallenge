@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -67,6 +68,10 @@ dependencies {
 
     // Sdp
     implementation "com.intuit.sdp:sdp-android:$sdp_version"
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    annotationProcessor "com.google.dagger:hilt-compiler:$hilt_version"
 
     // Testing
     testImplementation "junit:junit:$junit_version"

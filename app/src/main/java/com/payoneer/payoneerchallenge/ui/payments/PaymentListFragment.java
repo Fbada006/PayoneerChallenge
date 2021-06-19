@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import com.payoneer.payoneerchallenge.R;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class PaymentListFragment extends Fragment {
 
     public PaymentListFragment() {
