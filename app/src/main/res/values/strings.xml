@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">PayoneerChallenge</string>
+    <string name="app_name">Payoneer</string>
     <string name="label_checkout">Checkout</string>
+    <string name="label_payment_methods">Payment Methods</string>
 </resources>
