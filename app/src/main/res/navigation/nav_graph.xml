@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/dest_homeFragment">
 
     <fragment
-        android:id="@+id/paymentListFragment"
+        android:id="@+id/dest_paymentListFragment"
         android:name="com.payoneer.payoneerchallenge.ui.payments.PaymentListFragment"
         android:label="@string/label_payment_methods"
         tools:layout="@layout/fragment_payment_list" />
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/dest_homeFragment"
         android:name="com.payoneer.payoneerchallenge.ui.home.HomeFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_paymentListFragment"
-            app:destination="@id/paymentListFragment"
+            app:destination="@id/dest_paymentListFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
