@@ -16,6 +16,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        viewBinding true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -55,6 +59,14 @@ dependencies {
 
     // Reactive Streams (convert Observable to LiveData)
     implementation "androidx.lifecycle:lifecycle-reactivestreams:$reactive_streams_version"
+
+    // Java language implementation of navigation
+    implementation "androidx.navigation:navigation-fragment:$nav_version"
+    implementation "androidx.navigation:navigation-ui:$nav_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    // Sdp
+    implementation "com.intuit.sdp:sdp-android:$sdp_version"
 
     // Testing
     testImplementation "junit:junit:$junit_version"
