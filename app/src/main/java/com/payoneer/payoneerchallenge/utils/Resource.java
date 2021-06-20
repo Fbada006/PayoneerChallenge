@@ -30,6 +30,7 @@ public class Resource<T> {
     public static <T> Resource<T> error(@Nullable String msg, @Nullable T data) {
         Resource<T> error;
         if (data instanceof HttpException) {
+            Timber.e("Http exception!");
             HttpException exception = (HttpException) data;
             switch (exception.code()) {
                 case 404:
@@ -44,10 +45,12 @@ public class Resource<T> {
                     break;
             }
         } else if (data instanceof IOException) {
+            Timber.e("IO exception!");
             Timber.e(((IOException) data));
-            error = new Resource<>(Status.ERROR, data, msg);
+            error = new Resource<>(Status.N0_CONNECTION, data, msg);
         } else {
-            Timber.e("Generic error received %s", data);
+            Timber.e("Generic exception!");
+            Timber.e("Generic error received %s", data.toString());
             error = new Resource<>(Status.ERROR, data, msg);
         }
         return error;
@@ -57,6 +60,6 @@ public class Resource<T> {
         return new Resource<>(Status.LOADING, null, null);
     }
 
-    public enum Status {SUCCESS, ERROR, LOADING, NOT_FOUND, SERVER_ERROR, UNKNOWN_CODE}
+    public enum Status {SUCCESS, ERROR, LOADING, NOT_FOUND, SERVER_ERROR, N0_CONNECTION, UNKNOWN_CODE}
 }
 
