@@ -1,11 +1,13 @@
 package com.payoneer.payoneerchallenge.ui.payments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import com.payoneer.payoneerchallenge.databinding.FragmentPaymentListBinding;
@@ -30,6 +32,7 @@ public class PaymentListFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -37,6 +40,7 @@ public class PaymentListFragment extends Fragment {
         observePaymentData();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void observePaymentData() {
         paymentsViewModel.getPayments().observe(getViewLifecycleOwner(), paymentResource -> {
             switch (paymentResource.status) {
