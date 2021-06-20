@@ -7,9 +7,11 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.payoneer.payoneerchallenge.databinding.ActivityMainBinding;
+import dagger.hilt.android.AndroidEntryPoint;
 import java.util.HashSet;
 import java.util.Set;
 
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
