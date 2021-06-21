@@ -10,19 +10,18 @@
         android:id="@+id/main_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="@dimen/_12sdp"
         app:layout_constraintBottom_toTopOf="@id/nav_host_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:liftOnScroll="true">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
+            android:theme="@style/ToolbarTheme"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:theme="@style/ToolbarTheme"
-            app:titleTextColor="@android:color/white" />
+            android:background="?attr/colorPrimary" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.fragment.app.FragmentContainerView
