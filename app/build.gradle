@@ -89,6 +89,9 @@ dependencies {
     testImplementation "junit:junit:$junit_version"
     testImplementation "com.google.truth:truth:$truth_version"
     testImplementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation "com.jraska.livedata:testing:$livedata_testing_version"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$mock_web_server_version"
+    testImplementation "androidx.arch.core:core-testing:$executor_rule_version"
     androidTestImplementation "org.mockito:mockito-core:$mockito_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$expresso_version"
 }
