@@ -3,6 +3,7 @@ package com.payoneer.payoneerchallenge.repo;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.LiveData;
 import com.jraska.livedata.TestObserver;
+import com.payoneer.payoneerchallenge.network.models.ApplicableItem;
 import com.payoneer.payoneerchallenge.network.models.PaymentResponse;
 import com.payoneer.payoneerchallenge.utils.BaseTest;
 import com.payoneer.payoneerchallenge.utils.Resource;
@@ -38,6 +39,13 @@ public class PaymentsRepositoryImplTest extends BaseTest {
                     assert resource.data != null;
                     return resource.data.getNetworks().getApplicable().size() == 3;
                 })
-                .assertValue(resource -> resource.status.equals(Status.SUCCESS));
+                .assertValue(resource -> resource.status.equals(Status.SUCCESS))
+                .assertValue(resource -> {
+                    assert resource.data != null;
+                    ApplicableItem item = resource.data.getNetworks().getApplicable().get(0);
+                    boolean isCorrectCode = item.getCode().equals("AMEX");
+                    boolean isCorrectLink = item.getLinks().getLogo().equals("https://raw.githubusercontent.com/optile/checkout-android/develop/checkout/src/main/assets/networklogos/amex.png");
+                    return isCorrectCode && isCorrectLink;
+                });
     }
 }
