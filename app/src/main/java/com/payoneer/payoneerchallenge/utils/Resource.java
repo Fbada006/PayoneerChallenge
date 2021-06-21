@@ -11,25 +11,21 @@ public class Resource<T> {
     @Nullable
     public final T data;
 
-    @Nullable
-    public final String message;
-
-    public Resource(@NonNull Status status, @Nullable T data, @Nullable String message) {
+    public Resource(@NonNull Status status, @Nullable T data) {
         this.status = status;
         this.data = data;
-        this.message = message;
     }
 
     public static <T> Resource<T> success(@Nullable T data) {
-        return new Resource<>(Status.SUCCESS, data, null);
+        return new Resource<>(Status.SUCCESS, data);
     }
 
-    public static <T> Resource<T> error(@Nullable String msg, @Nullable T data) {
-        return ResourceUtils.getErrorResource(msg, data);
+    public static <T> Resource<T> error(@Nullable T data) {
+        return ResourceUtils.getErrorResource(data);
     }
 
     public static <T> Resource<T> loading() {
-        return new Resource<>(Status.LOADING, null, null);
+        return new Resource<>(Status.LOADING, null);
     }
 }
 

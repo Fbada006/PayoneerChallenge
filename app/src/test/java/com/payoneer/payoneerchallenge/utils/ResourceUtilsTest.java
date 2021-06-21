@@ -24,7 +24,7 @@ public class ResourceUtilsTest {
         HttpException exception = new HttpException(Response.error(404, fakeBody));
 
         // When the get error method is called
-        Resource<Exception> exceptionRes = ResourceUtils.getErrorResource("Some message", exception);
+        Resource<Exception> exceptionRes = ResourceUtils.getErrorResource( exception);
 
         // Confirm that the instance of the error is 404
         Truth.assertThat(exceptionRes.status).isEqualTo(Status.NOT_FOUND);
@@ -36,7 +36,7 @@ public class ResourceUtilsTest {
         HttpException exception = new HttpException(Response.error(500, fakeBody));
 
         // When the get error method is called
-        Resource<Exception> exceptionRes = ResourceUtils.getErrorResource("Some message", exception);
+        Resource<Exception> exceptionRes = ResourceUtils.getErrorResource( exception);
 
         // Confirm that the instance of the error is 404
         Truth.assertThat(exceptionRes.status).isEqualTo(Status.SERVER_ERROR);
@@ -48,7 +48,7 @@ public class ResourceUtilsTest {
         IOException exception = new IOException();
 
         // When the get error method is called
-        Resource<Exception> exceptionRes = ResourceUtils.getErrorResource("Some message", exception);
+        Resource<Exception> exceptionRes = ResourceUtils.getErrorResource( exception);
 
         // Confirm that the instance of the error is 404
         Truth.assertThat(exceptionRes.status).isEqualTo(Status.N0_CONNECTION);
@@ -60,7 +60,7 @@ public class ResourceUtilsTest {
         HttpException exception = new HttpException(Response.error(403, fakeBody));
 
         // When the get error method is called
-        Resource<Exception> exceptionRes = ResourceUtils.getErrorResource("Some message", exception);
+        Resource<Exception> exceptionRes = ResourceUtils.getErrorResource( exception);
 
         // Confirm that the instance of the error is 404
         Truth.assertThat(exceptionRes.status).isEqualTo(Status.UNKNOWN_CODE);
@@ -72,7 +72,7 @@ public class ResourceUtilsTest {
         Exception exception = new Exception();
 
         // When the get error method is called
-        Resource<Exception> exceptionRes = ResourceUtils.getErrorResource("Some message", exception);
+        Resource<Exception> exceptionRes = ResourceUtils.getErrorResource( exception);
 
         // Confirm that the instance of the error is 404
         Truth.assertThat(exceptionRes.status).isEqualTo(Status.ERROR);
