@@ -1,6 +1,7 @@
 package com.payoneer.payoneerchallenge.network.models;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ApplicableItem {
 
@@ -68,5 +69,28 @@ public class ApplicableItem {
 
     public List<InputElementsItem> getInputElements() {
         return inputElements;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ApplicableItem)) return false;
+        ApplicableItem item = (ApplicableItem) o;
+        return isRedirect() == item.isRedirect() &&
+                isSelected() == item.isSelected() &&
+                getRecurrence().equals(item.getRecurrence()) &&
+                getCode().equals(item.getCode()) &&
+                getMethod().equals(item.getMethod()) &&
+                getRegistration().equals(item.getRegistration()) &&
+                getOperationType().equals(item.getOperationType()) &&
+                getLabel().equals(item.getLabel()) &&
+                getGrouping().equals(item.getGrouping()) &&
+                getLinks().equals(item.getLinks()) &&
+                getInputElements().equals(item.getInputElements());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRecurrence(), isRedirect(), getCode(), getMethod(), getRegistration(), getOperationType(), getLabel(), getGrouping(), isSelected(), getLinks(), getInputElements());
     }
 }
