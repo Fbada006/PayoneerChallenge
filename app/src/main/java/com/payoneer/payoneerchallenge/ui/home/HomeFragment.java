@@ -30,11 +30,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.buttonCheckout.setOnClickListener(v -> {
-            Navigation.findNavController(view).navigate(
-                    R.id.action_homeFragment_to_paymentListFragment
-            );
-        });
+        binding.buttonCheckout.setOnClickListener(v -> Navigation.findNavController(view).navigate(
+                R.id.action_homeFragment_to_paymentListFragment
+        ));
     }
 
     @Override
