@@ -30,7 +30,7 @@ public class PaymentsRepositoryImpl implements PaymentsRepository {
                                 .onErrorReturn(PaymentResponse::new)
                                 .map(response -> {
                                     if (response.getNetworks() == null) {
-                                        return Resource.error("Something has gone terribly wrong", response.getError());
+                                        return Resource.error(response.getError());
                                     }
                                     return Resource.success(response);
                                 })
