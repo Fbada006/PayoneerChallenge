@@ -1,24 +1,25 @@
 package com.payoneer.payoneerchallenge.ui.payments;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import com.payoneer.payoneerchallenge.R;
 import com.payoneer.payoneerchallenge.databinding.FragmentPaymentListBinding;
+import com.payoneer.payoneerchallenge.network.models.ApplicableItem;
 import dagger.hilt.android.AndroidEntryPoint;
-import timber.log.Timber;
+import java.util.List;
 
 @AndroidEntryPoint
 public class PaymentListFragment extends Fragment {
 
     private PaymentsViewModel paymentsViewModel;
     private FragmentPaymentListBinding binding;
+    private PaymentListAdapter paymentListAdapter;
 
     public PaymentListFragment() {
         // Required empty public constructor
@@ -32,47 +33,67 @@ public class PaymentListFragment extends Fragment {
         return binding.getRoot();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         paymentsViewModel = new ViewModelProvider(this).get(PaymentsViewModel.class);
+        paymentListAdapter = new PaymentListAdapter();
+        initRecyclerView();
         observePaymentData();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void initRecyclerView() {
+        binding.rvPaymentList.setAdapter(paymentListAdapter);
+    }
+
     private void observePaymentData() {
         paymentsViewModel.getPayments().observe(getViewLifecycleOwner(), paymentResource -> {
             switch (paymentResource.status) {
                 case SUCCESS:
-                    Timber.e("We have data %s", paymentResource.data.toString());
-                    StringBuilder builder = new StringBuilder();
-                    paymentResource.data.getNetworks().getApplicable().forEach(applicableItem -> {
-                        builder.append(applicableItem.getCode());
-                        builder.append("\n");
-                    });
-                    binding.simpleText.setText(builder.toString());
+                    if (paymentResource.data != null) {
+                        showData(paymentResource.data.getNetworks().getApplicable());
+                    }
                     break;
                 case ERROR:
-                    Timber.e("Generic error received %s", paymentResource.message);
+                    showError(getString(R.string.generic_error_message));
                     break;
                 case LOADING:
-                    Timber.e("Loading");
+                    showLoading();
                     break;
                 case NOT_FOUND:
-                    Timber.e("Not found");
+                    showError(getString(R.string.not_found_error));
                     break;
                 case SERVER_ERROR:
-                    Timber.e("Server error");
+                    showError(getString(R.string.server_error));
                     break;
                 case N0_CONNECTION:
-                    Timber.e("Pos6sibly no connection");
+                    showError(getString(R.string.no_connection_error));
                     break;
                 case UNKNOWN_CODE:
-                    Timber.e("Unknown code ");
+                    showError(getString(R.string.unexpected_error));
                     break;
             }
         });
+    }
+
+    private void showData(List<ApplicableItem> applicableItemList) {
+        binding.tvError.setVisibility(View.GONE);
+        binding.progressLoading.setVisibility(View.GONE);
+        binding.rvPaymentList.setVisibility(View.VISIBLE);
+        paymentListAdapter.submitList(applicableItemList);
+    }
+
+    private void showError(String errorMessage) {
+        binding.rvPaymentList.setVisibility(View.GONE);
+        binding.progressLoading.setVisibility(View.GONE);
+        binding.tvError.setVisibility(View.VISIBLE);
+        binding.tvError.setText(errorMessage);
+    }
+
+    private void showLoading() {
+        binding.rvPaymentList.setVisibility(View.GONE);
+        binding.tvError.setVisibility(View.GONE);
+        binding.progressLoading.setVisibility(View.VISIBLE);
     }
 
     @Override
