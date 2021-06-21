@@ -27,7 +27,6 @@ public class PaymentsRepositoryImplTest extends BaseTest {
 
     @Test
     public void whenGetPaymentsReturnValidData() throws InterruptedException {
-        paymentsService.getPaymentNetworks();
         LiveData<Resource<PaymentResponse>> payments = repository.getPayments();
         TestObserver.test(payments)
                 .awaitValue()
