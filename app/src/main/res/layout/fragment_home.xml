@@ -12,9 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/label_checkout"
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@android:color/black"
+        app:strokeWidth="@dimen/_1sdp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
