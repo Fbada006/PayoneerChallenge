@@ -22,6 +22,8 @@ public class ApplicableItem {
 
     private boolean selected;
 
+    private Links links;
+
     private List<InputElementsItem> inputElements;
 
     public String getRecurrence() {
@@ -54,6 +56,10 @@ public class ApplicableItem {
 
     public String getGrouping() {
         return grouping;
+    }
+
+    public Links getLinks() {
+        return links;
     }
 
     public boolean isSelected() {

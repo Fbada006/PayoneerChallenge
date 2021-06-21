@@ -1,7 +1,5 @@
 package com.payoneer.payoneerchallenge.network.models;
 
-import com.google.gson.annotations.SerializedName;
-
 public class InputElementsItem {
 
     private String name;
