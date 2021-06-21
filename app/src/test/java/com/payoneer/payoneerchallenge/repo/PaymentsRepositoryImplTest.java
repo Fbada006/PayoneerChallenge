@@ -34,7 +34,10 @@ public class PaymentsRepositoryImplTest extends BaseTest {
                 .assertValue(resource -> resource.status.equals(Status.LOADING))
                 .awaitNextValue()
                 .assertHasValue()
-                .assertValue(resource -> resource.data.getNetworks().getApplicable().size() == 3)
+                .assertValue(resource -> {
+                    assert resource.data != null;
+                    return resource.data.getNetworks().getApplicable().size() == 3;
+                })
                 .assertValue(resource -> resource.status.equals(Status.SUCCESS));
     }
 }
