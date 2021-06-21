@@ -2,7 +2,6 @@ package com.payoneer.payoneerchallenge.ui.payments;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
-import com.payoneer.payoneerchallenge.network.models.Networks;
 import com.payoneer.payoneerchallenge.network.models.PaymentResponse;
 import com.payoneer.payoneerchallenge.repo.PaymentsRepository;
 import com.payoneer.payoneerchallenge.utils.Resource;
@@ -12,7 +11,7 @@ import javax.inject.Inject;
 @HiltViewModel
 public class PaymentsViewModel extends ViewModel {
 
-    private PaymentsRepository paymentsRepository;
+    private final PaymentsRepository paymentsRepository;
 
     @Inject
     public PaymentsViewModel(PaymentsRepository paymentsRepository) {

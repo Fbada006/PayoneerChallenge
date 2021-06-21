@@ -12,13 +12,14 @@ import javax.inject.Inject;
 public class PaymentsRepositoryImpl implements PaymentsRepository {
 
     private final PaymentsService paymentsService;
-    private MediatorLiveData<Resource<PaymentResponse>> response = new MediatorLiveData<>();
+    private final MediatorLiveData<Resource<PaymentResponse>> response = new MediatorLiveData<>();
 
     @Inject
     public PaymentsRepositoryImpl(PaymentsService paymentsService) {
         this.paymentsService = paymentsService;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public LiveData<Resource<PaymentResponse>> getPayments() {
         response.setValue(Resource.loading());
