@@ -44,8 +44,8 @@ public class ResourceUtilsTest {
 
     @Test
     public void givenValidIOExceptionDataReturnNoConnectionStatus() {
-        // Given an http exception
-        Exception exception = new IOException();
+        // Given an IO exception
+        IOException exception = new IOException();
 
         // When the get error method is called
         Resource<Exception> exceptionRes = ResourceUtils.getErrorResource("Some message", exception);
@@ -57,7 +57,7 @@ public class ResourceUtilsTest {
     @Test
     public void givenValidHttpExceptionDataReturnUnknownCodeStatus() {
         // Given an http exception
-        Exception exception = new HttpException(Response.error(403, fakeBody));
+        HttpException exception = new HttpException(Response.error(403, fakeBody));
 
         // When the get error method is called
         Resource<Exception> exceptionRes = ResourceUtils.getErrorResource("Some message", exception);
@@ -68,7 +68,7 @@ public class ResourceUtilsTest {
 
     @Test
     public void givenValidExceptionDataReturnGenericErrorStatus() {
-        // Given an http exception
+        // Given an exception
         Exception exception = new Exception();
 
         // When the get error method is called
