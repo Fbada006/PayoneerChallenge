@@ -6,13 +6,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import com.payoneer.payoneerchallenge.databinding.ItemPaymentMethodBinding;
-import com.payoneer.payoneerchallenge.network.models.ApplicableItem;
+import com.payoneer.payoneerchallenge.models.ApplicableItem;
 import com.payoneer.payoneerchallenge.utils.AdapterUtils;
 
 public class PaymentListAdapter extends ListAdapter<ApplicableItem, PaymentListAdapter.PaymentListViewHolder> {
 
     public PaymentListAdapter() {
-        super(AdapterUtils.DIFF_CALLBACK);
+        super(AdapterUtils.APPLICABLE_ITEM_ITEM_CALLBACK);
     }
 
     @NonNull

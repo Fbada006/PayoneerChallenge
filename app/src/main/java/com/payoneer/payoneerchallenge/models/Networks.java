@@ -1,4 +1,4 @@
-package com.payoneer.payoneerchallenge.network.models;
+package com.payoneer.payoneerchallenge.models;
 
 import com.google.gson.annotations.SerializedName;
 import java.util.List;

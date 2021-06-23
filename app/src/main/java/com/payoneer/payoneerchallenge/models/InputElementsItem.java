@@ -1,4 +1,4 @@
-package com.payoneer.payoneerchallenge.network.models;
+package com.payoneer.payoneerchallenge.models;
 
 public class InputElementsItem {
 

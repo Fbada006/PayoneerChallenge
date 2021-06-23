@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.LiveDataReactiveStreams;
 import androidx.lifecycle.MediatorLiveData;
 import com.payoneer.payoneerchallenge.network.api.PaymentsService;
-import com.payoneer.payoneerchallenge.network.models.PaymentResponse;
+import com.payoneer.payoneerchallenge.models.PaymentResponse;
 import com.payoneer.payoneerchallenge.utils.Resource;
 import io.reactivex.schedulers.Schedulers;
 import javax.inject.Inject;
