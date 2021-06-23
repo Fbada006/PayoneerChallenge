@@ -8,11 +8,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.payoneer.payoneerchallenge.databinding.ItemPaymentMethodBinding;
 import com.payoneer.payoneerchallenge.models.ApplicableItem;
 import com.payoneer.payoneerchallenge.utils.AdapterUtils;
+import com.payoneer.payoneerchallenge.utils.AdapterUtils.OnApplicableItemClickListener;
 
 public class PaymentListAdapter extends ListAdapter<ApplicableItem, PaymentListAdapter.PaymentListViewHolder> {
 
-    public PaymentListAdapter() {
+    private final OnApplicableItemClickListener onApplicableItemClickListener;
+
+    public PaymentListAdapter(OnApplicableItemClickListener onApplicableItemClickListener) {
         super(AdapterUtils.APPLICABLE_ITEM_ITEM_CALLBACK);
+        this.onApplicableItemClickListener = onApplicableItemClickListener;
     }
 
     @NonNull
@@ -25,7 +29,11 @@ public class PaymentListAdapter extends ListAdapter<ApplicableItem, PaymentListA
 
     @Override
     public void onBindViewHolder(@NonNull PaymentListViewHolder holder, int position) {
-        holder.bind(getItem(position));
+        ApplicableItem item = getItem(position);
+        holder.bind(item);
+        holder.binding.layoutPaymentMethod.setOnClickListener(v -> {
+            onApplicableItemClickListener.onItemClick(item);
+        });
     }
 
     static class PaymentListViewHolder extends RecyclerView.ViewHolder {
