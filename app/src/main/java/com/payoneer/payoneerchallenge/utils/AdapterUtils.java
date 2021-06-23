@@ -30,7 +30,7 @@ public class AdapterUtils {
                 @Override
                 public boolean areItemsTheSame(
                         @NonNull Product oldItem, @NonNull Product newItem) {
-                    return oldItem.getCode().equals(newItem.getCode());
+                    return oldItem.getId() == newItem.getId();
                 }
 
                 @Override
@@ -39,12 +39,18 @@ public class AdapterUtils {
                     return oldItem.equals(newItem);
                 }
             };
-    
+
     public static void loadLogo(String imageUrl, ImageView imagePaymentLogo) {
         Glide.with(imagePaymentLogo)
                 .load(imageUrl)
                 .placeholder(R.drawable.loading_placeholder)
                 .error(R.drawable.ic_error)
                 .into(imagePaymentLogo);
+    }
+
+    interface OnProductCheckListener {
+        void onItemCheck(Product product);
+
+        void onItemUncheck(Product product);
     }
 }
