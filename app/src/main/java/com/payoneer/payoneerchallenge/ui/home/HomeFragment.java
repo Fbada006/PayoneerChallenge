@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import com.payoneer.payoneerchallenge.R;
 import com.payoneer.payoneerchallenge.databinding.FragmentHomeBinding;
+import com.payoneer.payoneerchallenge.utils.FakeProductsGenerator;
 
 public class HomeFragment extends Fragment {
 
@@ -33,6 +34,13 @@ public class HomeFragment extends Fragment {
         binding.buttonCheckout.setOnClickListener(v -> Navigation.findNavController(view).navigate(
                 R.id.action_homeFragment_to_paymentListFragment
         ));
+        displayFakeProductList();
+    }
+
+    private void displayFakeProductList() {
+        ProductsAdapter adapter = new ProductsAdapter();
+        binding.productsRecyclerView.setAdapter(adapter);
+        adapter.submitList(FakeProductsGenerator.generateFakeProducts());
     }
 
     @Override
