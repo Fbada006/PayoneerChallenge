@@ -8,11 +8,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.payoneer.payoneerchallenge.databinding.ProductItemViewBinding;
 import com.payoneer.payoneerchallenge.models.Product;
 import com.payoneer.payoneerchallenge.utils.AdapterUtils;
+import com.payoneer.payoneerchallenge.utils.AdapterUtils.OnProductCheckListener;
+import timber.log.Timber;
 
 public class ProductsAdapter extends ListAdapter<Product, ProductsAdapter.ProductListViewHolder> {
 
-    public ProductsAdapter() {
+    private final OnProductCheckListener onProductCheckListener;
+
+    public ProductsAdapter(OnProductCheckListener onProductCheckListener) {
         super(AdapterUtils.PRODUCT_ITEM_CALLBACK);
+        this.onProductCheckListener = onProductCheckListener;
     }
 
     @NonNull
@@ -25,7 +30,7 @@ public class ProductsAdapter extends ListAdapter<Product, ProductsAdapter.Produc
 
     @Override
     public void onBindViewHolder(@NonNull ProductListViewHolder holder, int position) {
-        holder.bind(getItem(position));
+        holder.bind(getItem(position), onProductCheckListener);
     }
 
     static class ProductListViewHolder extends RecyclerView.ViewHolder {
@@ -36,9 +41,17 @@ public class ProductsAdapter extends ListAdapter<Product, ProductsAdapter.Produc
             this.binding = binding;
         }
 
-        public void bind(Product product) {
+        public void bind(Product product, OnProductCheckListener onProductCheckListener) {
             binding.tvProductName.setText(product.getProductName());
             binding.tvProductPrice.setText(product.getProductPrice());
+            binding.layoutProductItem.setOnClickListener(v -> {
+                binding.productCheckBox.setChecked(!(binding.productCheckBox.isChecked()));
+                if (binding.productCheckBox.isChecked()) {
+                    onProductCheckListener.onItemCheck(product);
+                } else {
+                    onProductCheckListener.onItemUncheck(product);
+                }
+            });
         }
     }
 }

@@ -48,7 +48,7 @@ public class AdapterUtils {
                 .into(imagePaymentLogo);
     }
 
-    interface OnProductCheckListener {
+    public interface OnProductCheckListener {
         void onItemCheck(Product product);
 
         void onItemUncheck(Product product);
