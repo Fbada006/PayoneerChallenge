@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import com.payoneer.payoneerchallenge.R;
 import com.payoneer.payoneerchallenge.databinding.FragmentPaymentListBinding;
-import com.payoneer.payoneerchallenge.network.models.ApplicableItem;
+import com.payoneer.payoneerchallenge.models.ApplicableItem;
 import dagger.hilt.android.AndroidEntryPoint;
 import java.util.List;
 

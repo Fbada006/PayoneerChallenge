@@ -1,6 +1,6 @@
 package com.payoneer.payoneerchallenge.network.api;
 
-import com.payoneer.payoneerchallenge.network.models.PaymentResponse;
+import com.payoneer.payoneerchallenge.models.PaymentResponse;
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
 

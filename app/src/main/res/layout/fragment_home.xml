@@ -3,21 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/_12sdp"
-    tools:context=".ui.home.HomeFragment">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_checkout"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/label_checkout"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@android:color/black"
-        app:strokeWidth="@dimen/_1sdp" />
+        app:spanCount="2"
+        tools:itemCount="9"
+        tools:listitem="@layout/product_item_view" />
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="@dimen/_24sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_checkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:text="@string/label_checkout"
+            android:textColor="@android:color/black"
+            app:cornerRadius="@dimen/_12sdp"
+            app:strokeColor="@android:color/black"
+            app:strokeWidth="@dimen/_1sdp" />
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
