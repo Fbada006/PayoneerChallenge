@@ -18,12 +18,11 @@ import javax.inject.Inject;
 @HiltViewModel
 public class HomeViewModel extends ViewModel {
 
-    private final MutableLiveData<List<Product>> productsLiveData = new MutableLiveData<>();
     private final Set<Product> products = new HashSet<>();
+    private final MutableLiveData<List<Product>> productsLiveData = new MutableLiveData<>(new ArrayList<>(products));
 
     @Inject
     public HomeViewModel() {
-        productsLiveData.setValue(new ArrayList<>(products));
     }
 
     public void addProductToFakeDb(Product product) {
