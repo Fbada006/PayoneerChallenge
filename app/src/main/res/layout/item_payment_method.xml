@@ -10,6 +10,7 @@
     android:elevation="@dimen/_12sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_payment_method"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"

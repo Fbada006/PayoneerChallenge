@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.payoneer.payoneerchallenge.R;
 import com.payoneer.payoneerchallenge.databinding.FragmentPaymentListBinding;
 import com.payoneer.payoneerchallenge.models.ApplicableItem;
@@ -37,9 +38,23 @@ public class PaymentListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         paymentsViewModel = new ViewModelProvider(this).get(PaymentsViewModel.class);
-        paymentListAdapter = new PaymentListAdapter();
+        paymentListAdapter = new PaymentListAdapter(this::showConfirmationDialog);
         initRecyclerView();
         observePaymentData();
+    }
+
+    private void showConfirmationDialog(ApplicableItem item) {
+        new MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
+                .setTitle(item.getLabel())
+                .setMessage(getString(R.string.confirm_pay_mode))
+                .setPositiveButton(getString(R.string.confirm), (dialog, which) -> {
+                    dialog.dismiss();
+                    requireActivity().finish();
+                })
+                .setNegativeButton(getString(R.string.cancel), null)
+                .setIcon(R.drawable.ic_money_off)
+                .create()
+                .show();
     }
 
     private void initRecyclerView() {

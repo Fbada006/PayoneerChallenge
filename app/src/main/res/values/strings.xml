@@ -9,4 +9,7 @@
     <string name="no_connection_error">Cannot retrieve data at this time. Please check your internet connnection and try again.</string>
     <string name="unexpected_error">An unexpected error has occured. Please try again.</string>
     <string name="content_product_image">Product image</string>
+    <string name="confirm_pay_mode">Please confirm that you wish to use this payment method</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 </resources>

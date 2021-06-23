@@ -53,4 +53,8 @@ public class AdapterUtils {
 
         void onItemUncheck(Product product);
     }
+
+    public interface OnApplicableItemClickListener {
+        void onItemClick(ApplicableItem item);
+    }
 }
