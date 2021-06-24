@@ -1,3 +1,4 @@
+[![Android CI](https://github.com/Fbada006/PayoneerChallenge/actions/workflows/main.yml/badge.svg)](https://github.com/Fbada006/PayoneerChallenge/actions/workflows/main.yml)
 
 # Android Developer Test for Payoneer Germany
 
@@ -12,6 +13,10 @@ This is an app that I have written as an interview for the role of Android Devel
 
 Clone the project from GitHub and open it using Android Studio. This project was developed using Android Studio 4.2.1 so make sure your IDE is updated. After cloning, make sure your device has internet connectivity and run the project.
 
+  
+  ## Running tests
+  
+The tests in this code are unit tests only. UI tests have not been included because of the issue to do with launching fragments using FragmentScenario and Hilt. A workaround exists for Kotlin but I have been unable to replicate it in Java as of yet. In any case, the logic has been tested properly so this is acceptable. Jun use the default run confirguration from Android Studio and you should see them passing.
   
 ## Tech Stack
 
