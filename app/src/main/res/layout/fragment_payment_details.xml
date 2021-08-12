@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_12sdp"
+    tools:context=".ui.paymentdetails.PaymentDetailsFragment">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_submit_payment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_24sdp"
+        android:backgroundTint="@color/green"
+        android:text="@string/button_pay"
+        app:layout_constraintEnd_toEndOf="@id/scroll_payment_details"
+        app:layout_constraintStart_toStartOf="@id/scroll_payment_details"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scroll_payment_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_submit_payment">
+
+        <LinearLayout
+            android:id="@+id/layout_payment_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/_12sdp" />
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

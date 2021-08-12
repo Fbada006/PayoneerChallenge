@@ -1,9 +1,11 @@
 package com.payoneer.payoneerchallenge.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.List;
 import java.util.Objects;
 
-public class ApplicableItem {
+public class ApplicableItem implements Parcelable {
 
     private String recurrence;
 
@@ -26,6 +28,48 @@ public class ApplicableItem {
     private Links links;
 
     private List<InputElementsItem> inputElements;
+
+    protected ApplicableItem(Parcel in) {
+        recurrence = in.readString();
+        redirect = in.readByte() != 0;
+        code = in.readString();
+        method = in.readString();
+        registration = in.readString();
+        operationType = in.readString();
+        label = in.readString();
+        grouping = in.readString();
+        selected = in.readByte() != 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(recurrence);
+        dest.writeByte((byte) (redirect ? 1 : 0));
+        dest.writeString(code);
+        dest.writeString(method);
+        dest.writeString(registration);
+        dest.writeString(operationType);
+        dest.writeString(label);
+        dest.writeString(grouping);
+        dest.writeByte((byte) (selected ? 1 : 0));
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<ApplicableItem> CREATOR = new Creator<ApplicableItem>() {
+        @Override
+        public ApplicableItem createFromParcel(Parcel in) {
+            return new ApplicableItem(in);
+        }
+
+        @Override
+        public ApplicableItem[] newArray(int size) {
+            return new ApplicableItem[size];
+        }
+    };
 
     public String getRecurrence() {
         return recurrence;

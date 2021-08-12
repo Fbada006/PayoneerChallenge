@@ -3,26 +3,28 @@ package com.payoneer.payoneerchallenge.repo;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.LiveDataReactiveStreams;
 import androidx.lifecycle.MediatorLiveData;
-import com.payoneer.payoneerchallenge.network.api.PaymentsService;
 import com.payoneer.payoneerchallenge.models.PaymentResponse;
+import com.payoneer.payoneerchallenge.models.PostPaymentResponse;
+import com.payoneer.payoneerchallenge.network.api.PaymentsService;
 import com.payoneer.payoneerchallenge.utils.Resource;
 import io.reactivex.schedulers.Schedulers;
 import javax.inject.Inject;
 
+@SuppressWarnings("unchecked")
 public class PaymentsRepositoryImpl implements PaymentsRepository {
 
     private final PaymentsService paymentsService;
-    private final MediatorLiveData<Resource<PaymentResponse>> response = new MediatorLiveData<>();
+    private final MediatorLiveData<Resource<PaymentResponse>> paymentListResponse = new MediatorLiveData<>();
+    private final MediatorLiveData<Resource<PostPaymentResponse>> postPaymentDetailsResponse = new MediatorLiveData<>();
 
     @Inject
     public PaymentsRepositoryImpl(PaymentsService paymentsService) {
         this.paymentsService = paymentsService;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public LiveData<Resource<PaymentResponse>> getPayments() {
-        response.setValue(Resource.loading());
+        paymentListResponse.setValue(Resource.loading());
 
         final LiveData<Resource<?>> source =
                 LiveDataReactiveStreams.fromPublisher(
@@ -37,11 +39,36 @@ public class PaymentsRepositoryImpl implements PaymentsRepository {
                                 .subscribeOn(Schedulers.io())
                 );
 
-        response.addSource(source, list -> {
-            response.setValue((Resource<PaymentResponse>) list);
-            response.removeSource(source);
+        paymentListResponse.addSource(source, list -> {
+            paymentListResponse.setValue((Resource<PaymentResponse>) list);
+            paymentListResponse.removeSource(source);
         });
 
-        return response;
+        return paymentListResponse;
+    }
+
+    @Override
+    public LiveData<Resource<PostPaymentResponse>> postPaymentDetails(String postUrl, String paymentJson) {
+        postPaymentDetailsResponse.setValue(Resource.loading());
+
+        final LiveData<Resource<?>> source =
+                LiveDataReactiveStreams.fromPublisher(
+                        paymentsService.postPaymentDetails(postUrl, paymentJson)
+                                .onErrorReturn(PostPaymentResponse::new)
+                                .map(response -> {
+                                    if (response.getPayPostResponse() == null) {
+                                        return Resource.error(response.getError());
+                                    }
+                                    return Resource.success(response);
+                                })
+                                .subscribeOn(Schedulers.io())
+                );
+
+        postPaymentDetailsResponse.addSource(source, list -> {
+            postPaymentDetailsResponse.setValue((Resource<PostPaymentResponse>) list);
+            postPaymentDetailsResponse.removeSource(source);
+        });
+
+        return postPaymentDetailsResponse;
     }
 }
