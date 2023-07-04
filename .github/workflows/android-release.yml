@@ -27,7 +27,7 @@ jobs:
 
       - name: Rename APK file
         run: |
-          mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/PayoChallenge.apk    
+          mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/PayoChallenge.apk    
 
       - name: Generate Release Tag
         id: tag
