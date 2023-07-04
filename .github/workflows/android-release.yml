@@ -25,21 +25,21 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
 
-      - name: Upload Release APK
-        uses: actions/upload-artifact@v2
-        with:
-          name: Release APK
-          path: ${{ steps.sign_app.outputs.signedReleaseFile }}
-
-      - name: Download Release APK
-        uses: actions/download-artifact@v2
-        with:
-          name: Release APK
-          path: downloads
+#      - name: Upload Release APK
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: Release APK
+#          path: ${{ steps.sign_app.outputs.signedReleaseFile }}
+#
+#      - name: Download Release APK
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: Release APK
+#          path: downloads
 
       - name: Rename APK file
         run: |
-          mv downloads/app-release.apk downloads/my-app-release-v1.0.0.apk    
+          mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/my-app-release-v1.0.0.apk    
 
       - name: Generate Release Tag
         id: tag
@@ -52,4 +52,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.tag.outputs.release_tag }}
-          files: downloads/*.apk
+          files: app/build/outputs/apk/release/*.apk
