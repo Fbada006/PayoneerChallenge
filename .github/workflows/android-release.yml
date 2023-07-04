@@ -14,7 +14,7 @@ jobs:
 
       # 2. Generate Release APK
       - name: Generate Release APK
-        run: ./gradlew assembleFossRelease
+        run: ./gradlew assembleRelease
 
       # 3. Sign APK
       - name: Sign APK
@@ -22,7 +22,7 @@ jobs:
         # ID used to access action output
         id: sign_app
         with:
-          releaseDirectory: app/build/outputs/apk/foss/release
+          releaseDirectory: app/build/outputs/apk/payo/release
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
