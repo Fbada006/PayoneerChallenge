@@ -51,7 +51,7 @@ jobs:
       - name: Generate Release Tag
         id: tag
         run: |
-          echo "::set-output name=release_tag::APP_$(date +"%Y.%m.%d_%H-%M")"
+          echo "::set-output name=release_tag::PayoChallenge_$(date +"%Y.%m.%d_%H-%M")"
 
       # 8. Create GitHub Release
       - name: Create GitHub Release
