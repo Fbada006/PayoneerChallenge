@@ -28,31 +28,36 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
 
-      # 4. Upload release APK as artifact
+      # 4. Rename APK file
+      - name: Rename APK file
+        run: |
+          mv ${{ steps.sign_app.outputs.signedReleaseFile }} ${{ steps.sign_app.outputs.signedReleaseFile }}/PayoneerChallenge.apk
+
+      # 5. Upload renamed APK as artifact
       - name: Upload Release APK
         uses: actions/upload-artifact@v2
         with:
           name: Release APK
-          path: ${{ steps.sign_app.outputs.signedReleaseFile }}
+          path: ${{ steps.sign_app.outputs.signedReleaseFile }}/PayoneerChallenge.apk
 
-      # 5. Download release APK artifact from the build workflow
+      # 6. Download release APK artifact from the build workflow
       - name: Download Release APK
         uses: actions/download-artifact@v2
         with:
           name: Release APK
           path: downloads
 
-      # 6. Generate release tag
+      # 7. Generate release tag
       - name: Generate Release Tag
         id: tag
         run: |
           echo "::set-output name=release_tag::APP_$(date +"%Y.%m.%d_%H-%M")"
 
-      # 9. Create GitHub Release
+      # 8. Create GitHub Release
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.tag.outputs.release_tag }}
-          files: downloads/*.apk
+          files: downloads/PayoneerChallenge.apk
