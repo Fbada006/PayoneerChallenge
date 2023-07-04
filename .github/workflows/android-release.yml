@@ -31,7 +31,7 @@ jobs:
       # 4. Rename APK file
       - name: Rename APK file
         run: |
-          mv ${{ steps.sign_app.outputs.signedReleaseFile }} ${{ steps.sign_app.outputs.signedReleaseFile }}/PayoneerChallenge.apk
+          mv ${{ steps.sign_app.outputs.signedReleaseFile }} app/build/outputs/apk/release/PayoneerChallenge.apk
 
       # 5. Upload renamed APK as artifact
       - name: Upload Release APK
